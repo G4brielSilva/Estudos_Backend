@@ -1,5 +1,5 @@
 {
-    "hooks": {
-        "pre-commit": "eslint-staged"
-    }
+  "hooks": {
+    "pre-commit": "eslint-staged"
+  }
 }
