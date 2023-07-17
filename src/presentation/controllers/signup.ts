@@ -1,10 +1,9 @@
 import { MissingParamError } from '../errors/MissingParamError';
 import { type HttpResponse, type HttpRequest } from '../protocols/Http';
-import { badRequest } from '../helpers/httpHelper';
+import { badRequest, serverError } from '../helpers/httpHelper';
 import { Controller } from '../protocols/Controller';
 import { EmailValidator } from '../protocols/EmailValidator';
 import { InvalidParamError } from '../errors/InvalidParamError';
-import { ServerError } from '../errors/ServerError';
 
 export class SignUpController implements Controller {
     private readonly emailValidator: EmailValidator;
@@ -33,10 +32,7 @@ export class SignUpController implements Controller {
                 body: new Error()
             };
         } catch (error) {
-            return {
-                statusCode: 500,
-                body: new ServerError()
-            };
+            return serverError();
         }
     }
 }
