@@ -29,17 +29,17 @@ const makeEmailValidator = (): EmailValidator => {
 interface SutTypes {
     sut: SignUpController
     emailValidator: EmailValidator
-    addAccount: AddAccount
+    addAccountStub: AddAccount
 }
 
 const makeSut = (): SutTypes => {
     const emailValidator = makeEmailValidator();
-    const addAccount = makeAddAccount();
-    const sut = new SignUpController(emailValidator, addAccount);
+    const addAccountStub = makeAddAccount();
+    const sut = new SignUpController(emailValidator, addAccountStub);
     return {
         sut,
         emailValidator,
-        addAccount
+        addAccountStub
     };
 };
 
@@ -181,8 +181,8 @@ describe('Signup Controller', () => {
     });
 
     test('Should call AddAccount with correct values', async () => {
-        const { sut, addAccount } = makeSut();
-        const addSpy = jest.spyOn(addAccount, 'add');
+        const { sut, addAccountStub } = makeSut();
+        const addSpy = jest.spyOn(addAccountStub, 'add');
         const httpRequest = {
             body: {
                 name: 'any_name',
@@ -201,8 +201,8 @@ describe('Signup Controller', () => {
     });
 
     test('Should return 500 if AddAccount trows', async () => {
-        const { sut, addAccount } = makeSut();
-        jest.spyOn(addAccount, 'add').mockImplementationOnce(async () => {
+        const { sut, addAccountStub } = makeSut();
+        jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {
             return Promise.reject((new Error()));
         });
 
