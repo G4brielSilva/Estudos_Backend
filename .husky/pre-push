@@ -1,7 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx --no-install
-
-npm eslint 'src/**/*.ts' --fix
-npm test
+npm run test_api

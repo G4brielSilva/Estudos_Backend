@@ -10,6 +10,8 @@
     "test:integration": "npm test -- --watch -c jest-integration.config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
+    "lint": "npx eslint . --fix --ext ts",
+    "test_api": "npm run lint && npm run test:staged",
     "prepare": "husky install"
   },
   "keywords": [],
