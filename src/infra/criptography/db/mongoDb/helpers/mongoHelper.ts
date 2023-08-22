@@ -22,7 +22,7 @@ export const MongoHelper = {
         return this.db.collection(name);
     },
 
-    map (account: any): AccountModel {
+    map (account: any): any {
         const { _id, ...accountWithoutId } = account;
         return Object.assign({}, accountWithoutId, { id: _id });
     }
