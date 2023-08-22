@@ -15,18 +15,21 @@ describe('Account Mongo Repository', () => {
     });
 
     beforeEach(async () => {
-
+        const accountCollection = MongoHelper.getCollection(ACCOUNTS_COLLECTION_TEST);
+        await accountCollection.deleteMany({});
     });
 
+    const makeSut = (): AccountMongoRepository => {
+        return new AccountMongoRepository(ACCOUNTS_COLLECTION_TEST);
+    };
+
     test('Should return an account on sucess', async () => {
-        const sut = new AccountMongoRepository(ACCOUNTS_COLLECTION_TEST);
+        const sut = makeSut();
         const account = await sut.add({
             name: 'any_name',
             email: 'any_email@email.com',
             password: 'any_password'
         });
-
-        console.log();
 
         expect(account).toBeTruthy();
         expect(account.id).toBeTruthy();
