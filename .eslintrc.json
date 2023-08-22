@@ -4,6 +4,8 @@
         "project": "./tsconfig.json"
     },
     "rules": {
+        "no-tabs": "off",
+        "indent": ["error", 4],
         "semi": "off",
         "eol-last": "off",
         "@typescript-eslint/semi": ["error", "always"],
