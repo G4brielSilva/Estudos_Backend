@@ -1,5 +1,4 @@
 import { Collection, MongoClient, Db } from 'mongodb';
-import { AccountModel } from '../../../../../domain/models/Account.models';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
