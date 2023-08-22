@@ -48,11 +48,11 @@ describe('Signup Controller', () => {
         const { sut } = makeSut();
 
         const httpRequest = {
-        body: {
-            email: 'any_email@email.com',
-            password: 'any_password',
-            passwordConfirmation: 'any_password'
-        }
+            body: {
+                email: 'any_email@email.com',
+                password: 'any_password',
+                passwordConfirmation: 'any_password'
+            }
         };
 
         const httpResponse = await sut.handle(httpRequest);
@@ -64,11 +64,11 @@ describe('Signup Controller', () => {
         const { sut } = makeSut();
 
         const httpRequest = {
-        body: {
-            name: 'any_name',
-            password: 'any_password',
-            passwordConfirmation: 'any_password'
-        }
+            body: {
+                name: 'any_name',
+                password: 'any_password',
+                passwordConfirmation: 'any_password'
+            }
         };
 
         const httpResponse = await sut.handle(httpRequest);
