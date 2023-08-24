@@ -1,7 +1,10 @@
 import request from 'supertest';
-import app from '../config/app';
 import * as dotenv from 'dotenv';
+import { InsertOneResult } from 'mongodb';
+import app from '../config/app';
 import { MongoHelper } from '../../infra/criptography/db/mongoDb/helpers/mongoHelper';
+import { AccountMongoRepository } from '../../infra/criptography/db/mongoDb/accountRepository/Account.repository';
+import { AccountModel } from '../../domain/models/Account.models';
 
 describe('SignUp Routes', () => {
     dotenv.config();
@@ -9,6 +12,12 @@ describe('SignUp Routes', () => {
 
     beforeAll(async () => {
         await MongoHelper.connect(process.env.MONGO_URL as string);
+        jest.spyOn(AccountMongoRepository.prototype, 'add').mockImplementation(async (accountData: any): Promise<AccountModel> => {
+            const accountCollection = MongoHelper.getCollection('accounts_test');
+            const result: InsertOneResult = await accountCollection.insertOne(accountData);
+            const account = await accountCollection.findOne(result.insertedId);
+            return MongoHelper.map(account);
+        });
     });
 
     afterAll(async () => {

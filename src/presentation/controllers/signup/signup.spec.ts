@@ -4,7 +4,7 @@ import { SignUpController } from './signup.controller';
 
 const makeAddAccount = (): AddAccount => {
     class AddAccountStub implements AddAccount {
-        async add (account: AddAccountModel): Promise<AccountModel> {
+        async add(account: AddAccountModel): Promise<AccountModel> {
             const fakeAccount: AccountModel = {
                 id: 'valid_id',
                 name: 'valid_name',
@@ -19,7 +19,7 @@ const makeAddAccount = (): AddAccount => {
 
 const makeEmailValidator = (): EmailValidator => {
     class EmailValidatorStub implements EmailValidator {
-        isValid (email: string): boolean {
+        isValid(email: string): boolean {
             return true;
         }
     }
@@ -27,9 +27,9 @@ const makeEmailValidator = (): EmailValidator => {
 };
 
 interface SutTypes {
-    sut: SignUpController
-    emailValidator: EmailValidator
-    addAccountStub: AddAccount
+    sut: SignUpController;
+    emailValidator: EmailValidator;
+    addAccountStub: AddAccount;
 }
 
 const makeSut = (): SutTypes => {
@@ -203,7 +203,7 @@ describe('Signup Controller', () => {
     test('Should return 500 if AddAccount trows', async () => {
         const { sut, addAccountStub } = makeSut();
         jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {
-            return Promise.reject((new Error()));
+            return Promise.reject(new Error());
         });
 
         const httpRequest = {

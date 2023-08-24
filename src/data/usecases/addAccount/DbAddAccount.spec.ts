@@ -3,7 +3,7 @@ import { DbAddAccount } from './DbAddAccount';
 
 const makeEncrypter = (): Encrypter => {
     class EncrypterStub implements Encrypter {
-        async encrypt (value: string): Promise<string> {
+        async encrypt(value: string): Promise<string> {
             return Promise.resolve('hashed_password');
         }
     }
@@ -13,7 +13,7 @@ const makeEncrypter = (): Encrypter => {
 
 const makeAddAccountRepository = (): AddAccountRepository => {
     class AddAccountRepositoryStub implements AddAccountRepository {
-        async add (accountData: AddAccountModel): Promise<AccountModel> {
+        async add(accountData: AddAccountModel): Promise<AccountModel> {
             const fakeAccount = {
                 id: 'valid_id',
                 name: 'valid_name',
@@ -28,9 +28,9 @@ const makeAddAccountRepository = (): AddAccountRepository => {
 };
 
 interface SutTypes {
-    sut: DbAddAccount
-    encrypterStub: Encrypter
-    addAccountRepositoryStub: AddAccountRepository
+    sut: DbAddAccount;
+    encrypterStub: Encrypter;
+    addAccountRepositoryStub: AddAccountRepository;
 }
 
 const makeSut = (): SutTypes => {

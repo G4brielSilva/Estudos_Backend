@@ -1,6 +1,6 @@
+import * as dotenv from 'dotenv';
 import { MongoHelper } from '../helpers/mongoHelper';
 import { AccountMongoRepository } from './Account.repository';
-import * as dotenv from 'dotenv';
 
 describe('Account Mongo Repository', () => {
     dotenv.config();

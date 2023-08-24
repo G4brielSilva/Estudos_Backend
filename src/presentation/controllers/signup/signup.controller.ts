@@ -4,16 +4,19 @@ import { badRequest, serverError, ok } from '../../helpers/http.helper';
 
 export class SignUpController implements Controller {
     private readonly emailValidator: EmailValidator;
+
     private readonly addAccount: AddAccount;
 
-    constructor (emailValidator: EmailValidator, addAccount: AddAccount) {
+    constructor(emailValidator: EmailValidator, addAccount: AddAccount) {
         this.emailValidator = emailValidator;
         this.addAccount = addAccount;
     }
 
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
             const requiredFields = ['name', 'email', 'password', 'passwordConfirmation'];
+
+            // eslint-disable-next-line no-restricted-syntax
             for (const field of requiredFields) {
                 if (!httpRequest.body[field]) {
                     return badRequest(new MissingParamError(field));

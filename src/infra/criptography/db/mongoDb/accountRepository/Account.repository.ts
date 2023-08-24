@@ -7,11 +7,11 @@ import { MongoHelper } from '../helpers/mongoHelper';
 export class AccountMongoRepository implements AddAccountRepository {
     private readonly collection: string;
 
-    constructor (collection: string) {
+    constructor(collection: string) {
         this.collection = collection;
     }
 
-    async add (accountData: AddAccountModel): Promise<AccountModel> {
+    async add(accountData: AddAccountModel): Promise<AccountModel> {
         const accountCollection = MongoHelper.getCollection(this.collection);
         const result: InsertOneResult = await accountCollection.insertOne(accountData);
         const account = await accountCollection.findOne(result.insertedId);
