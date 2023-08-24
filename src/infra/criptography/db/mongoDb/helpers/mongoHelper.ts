@@ -6,18 +6,22 @@ dotenv.config();
 export const MongoHelper = {
     client: null as unknown as MongoClient,
     bd: null as unknown as Db,
+    url: null as unknown as string,
 
     async connect(url: string): Promise<void> {
+        this.url = url;
         this.client = new MongoClient(url);
         this.client.connect();
         this.db = this.client.db(process.env.DB_NAME);
     },
 
     async disconnect(): Promise<void> {
-        this.client.close();
+        await this.client.close();
+        this.client = null;
     },
 
-    getCollection(name: string): Collection {
+    async getCollection(name: string): Promise<Collection> {
+        if (!this.client) await this.connect();
         return this.db.collection(name);
     },
 

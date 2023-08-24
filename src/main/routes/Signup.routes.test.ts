@@ -13,7 +13,7 @@ describe('SignUp Routes', () => {
     beforeAll(async () => {
         await MongoHelper.connect(process.env.MONGO_URL as string);
         jest.spyOn(AccountMongoRepository.prototype, 'add').mockImplementation(async (accountData: any): Promise<AccountModel> => {
-            const accountCollection = MongoHelper.getCollection('accounts_test');
+            const accountCollection = await MongoHelper.getCollection('accounts_test');
             const result: InsertOneResult = await accountCollection.insertOne(accountData);
             const account = await accountCollection.findOne(result.insertedId);
             return MongoHelper.map(account);
@@ -25,7 +25,7 @@ describe('SignUp Routes', () => {
     });
 
     beforeEach(async () => {
-        const accountCollection = MongoHelper.getCollection(ACCOUNTS_COLLECTION_TEST);
+        const accountCollection = await MongoHelper.getCollection(ACCOUNTS_COLLECTION_TEST);
         await accountCollection.deleteMany({});
     });
 
